@@ -20,4 +20,4 @@ I’m comfortable using AI tools for brainstorming, debugging, and improving pro
 - More projects coming soon
 
 ## 📫 Contact
-- GitHub: https://github.com/ifechukwu-dev
+- GitHub: https://github.com/George-stack16
