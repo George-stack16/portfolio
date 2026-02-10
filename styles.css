@@ -48,10 +48,10 @@
     justify-content: center;
     gap: 0.5rem;
     background: transparent;
-    border: 2px solid transparent;
+    border: 2px solid rgba(0,0,0,0);
     padding: 0.35rem 0.6rem;
     border-radius: 8px;
-    color: var(--primary-color);
+    color: var(--text-primary);
     cursor: pointer;
     transition: var(--transition);
     font-size: 1rem;
@@ -90,11 +90,12 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background-color: var(--bg-secondary);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
     transition: var(--transition);
+    color: var(--text-primary);
 }
 
 .nav-container {
@@ -110,7 +111,7 @@ body {
 .nav-logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--text-primary);
     text-decoration: none;
 }
 
@@ -156,7 +157,7 @@ body {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: var(--primary-color);
+    background-color: var(--text-primary);
     margin: 3px 0;
     transition: var(--transition);
 }
