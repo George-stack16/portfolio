@@ -23,6 +23,54 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark theme overrides */
+[data-theme="dark"] {
+    --primary-color: #ffffff;
+    --secondary-color: #0b1220;
+    --accent-color: #60a5fa;
+    --text-primary: #e6eef8;
+    --text-secondary: #9fb0c8;
+    --text-light: #9aa6b2;
+    --bg-primary: #071019;
+    --bg-secondary: #0b1220;
+    --bg-tertiary: #0f1724;
+    --border-color: rgba(255,255,255,0.06);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 2px solid transparent;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+.theme-toggle i {
+    font-size: 1.05rem;
+}
+.theme-toggle:hover {
+    transform: translateY(-2px);
+}
+
+/* Navbar scrolled state (used by JS) */
+.navbar.scrolled {
+    box-shadow: var(--shadow-md);
+}
+[data-theme="dark"] .navbar.scrolled {
+    background: rgba(11,18,32,0.9) !important;
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;

@@ -35,14 +35,12 @@ navLinks.forEach(link => {
     });
 });
 
-// Navbar background on scroll
+// Navbar background on scroll - toggle a class so CSS variables handle colors
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+        navbar.classList.add('scrolled');
     } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
+        navbar.classList.remove('scrolled');
     }
 });
 
@@ -73,19 +71,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Typing effect for hero title
+// Typing effect for hero title — handles HTML tags safely so spans stay intact
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.innerHTML = '';
-    
+
     function type() {
         if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
+            if (text[i] === '<') {
+                // append full tag immediately to avoid broken markup
+                let tag = '';
+                while (i < text.length && text[i] !== '>') {
+                    tag += text[i];
+                    i++;
+                }
+                if (i < text.length) { // include closing '>'
+                    tag += text[i];
+                    i++;
+                }
+                element.innerHTML += tag;
+                // continue typing immediately after tag
+                setTimeout(type, 0);
+            } else {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
         }
     }
-    
+
     type();
 }
 
@@ -97,6 +111,33 @@ window.addEventListener('load', () => {
         setTimeout(() => {
             typeWriter(heroTitle, originalText, 80);
         }, 500);
+    }
+
+    // Initialize theme (dark/light) after load
+    const themeToggle = document.getElementById('theme-toggle');
+    function setTheme(mode) {
+        document.documentElement.setAttribute('data-theme', mode);
+        localStorage.setItem('theme', mode);
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            if (icon) icon.className = mode === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
     }
 });
 
